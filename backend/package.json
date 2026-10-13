@@ -1,0 +1,25 @@
+{
+  "name": "agentops-ai-backend",
+  "version": "1.0.0",
+  "description": "AgentOps AI - Autonomous Business Recovery Platform Backend",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node src/seed/seedRunner.js",
+    "test": "node tests/api.test.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "mongodb-memory-server": "^10.1.3",
+    "morgan": "^1.10.0",
+    "zod": "^3.24.1"
+  }
+}

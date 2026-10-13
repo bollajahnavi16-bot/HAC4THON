@@ -1,0 +1,13 @@
+{
+  "name": "agentops-ai",
+  "version": "1.0.0",
+  "description": "AgentOps AI — Autonomous Business Recovery Platform",
+  "private": true,
+  "scripts": {
+    "start": "node backend/src/server.js",
+    "seed": "node backend/src/seed/seedRunner.js",
+    "test": "node backend/tests/api.test.js",
+    "backend": "node backend/src/server.js",
+    "frontend": "node frontend/node_modules/vite/bin/vite.js frontend"
+  }
+}

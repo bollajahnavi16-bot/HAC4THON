@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  body {
+    background-color: #090C12;
+    color: #E8EDF5;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Remove default focus outlines; we use explicit :focus-visible rings */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid #3B82F6;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: #E8EDF5;
+  }
+
+  /* Input / select resets */
+  input, textarea, select, button {
+    font: inherit;
+  }
+  select option {
+    background-color: #111827;
+    color: #E8EDF5;
+  }
+}
+
+/* ─── Scrollbars ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; height: 5px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: #1E2D42; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #263244; }
+* { scrollbar-width: thin; scrollbar-color: #1E2D42 transparent; }
+
+/* ─── Enterprise surface utilities ──────────────────────────────────────── */
+@layer components {
+
+  /* Panel variants */
+  .panel {
+    @apply bg-surface-panel border border-border rounded-lg shadow-card;
+  }
+  .panel-raised {
+    @apply bg-surface-raised border border-border rounded-lg shadow-card;
+  }
+  .panel-section {
+    @apply border-b border-border pb-3 mb-4 last:border-0 last:pb-0 last:mb-0;
+  }
+
+  /* Consistent form controls */
+  .form-input {
+    @apply w-full px-3 py-2 rounded-md bg-surface-raised border border-border
+           text-ink-primary text-sm placeholder:text-ink-muted
+           focus:border-brand focus:ring-1 focus:ring-brand/40
+           transition-colors duration-150;
+  }
+  .form-select {
+    @apply form-input cursor-pointer;
+  }
+  .form-label {
+    @apply block text-xs font-medium text-ink-secondary mb-1.5;
+  }
+
+  /* Button system */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-3.5 py-2
+           rounded-md text-sm font-medium
+           transition-all duration-150
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/60
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-brand hover:bg-blue-500 text-white shadow-sm;
+  }
+  .btn-secondary {
+    @apply btn bg-surface-raised hover:bg-surface-overlay border border-border
+           text-ink-secondary hover:text-ink-primary;
+  }
+  .btn-danger {
+    @apply btn bg-danger/10 hover:bg-danger/20 border border-danger/30
+           text-danger-text hover:border-danger/50;
+  }
+  .btn-ghost {
+    @apply btn hover:bg-surface-raised text-ink-secondary hover:text-ink-primary;
+  }
+  .btn-sm {
+    @apply px-2.5 py-1.5 text-xs;
+  }
+  .btn-xs {
+    @apply px-2 py-1 text-xs;
+  }
+
+  /* Navigation link states */
+  .nav-link {
+    @apply flex items-center gap-2.5 px-3 py-2 rounded-md text-sm
+           text-ink-secondary hover:text-ink-primary hover:bg-surface-panel
+           transition-all duration-100 cursor-pointer;
+  }
+  .nav-link-active {
+    @apply nav-link text-ink-primary bg-surface-panel
+           border-l-2 border-brand font-medium;
+  }
+
+  /* Table */
+  .data-table {
+    @apply w-full text-sm text-left;
+  }
+  .data-table thead {
+    @apply border-b border-border;
+  }
+  .data-table thead th {
+    @apply pb-2.5 text-2xs font-semibold uppercase tracking-wider text-ink-muted;
+  }
+  .data-table tbody tr {
+    @apply border-b border-border/50 hover:bg-surface-raised/50 transition-colors;
+  }
+  .data-table tbody td {
+    @apply py-3 pr-4 align-middle;
+  }
+  .data-table tbody tr:last-child {
+    @apply border-0;
+  }
+
+  /* Status dot */
+  .status-dot {
+    @apply inline-block w-1.5 h-1.5 rounded-full flex-shrink-0;
+  }
+  .status-dot-ok     { @apply status-dot bg-ok; }
+  .status-dot-warn   { @apply status-dot bg-warn; }
+  .status-dot-danger { @apply status-dot bg-danger; }
+  .status-dot-info   { @apply status-dot bg-brand; }
+  .status-dot-muted  { @apply status-dot bg-ink-disabled; }
+
+  /* Code / Monospace snippet */
+  .mono-id {
+    @apply font-mono text-xs text-brand-text bg-brand-dim px-1.5 py-0.5 rounded;
+  }
+
+  /* Empty state */
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-16 text-center;
+  }
+
+  /* Page header */
+  .page-header {
+    @apply flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6;
+  }
+  .page-title {
+    @apply text-xl font-semibold text-ink-primary tracking-tight;
+  }
+  .page-subtitle {
+    @apply text-sm text-ink-muted mt-0.5;
+  }
+
+  /* Section heading */
+  .section-label {
+    @apply text-2xs font-semibold uppercase tracking-widest text-ink-muted;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-border my-4;
+  }
+}
+
+/* ─── Active workflow step pulse (subtle, not neon) ─────────────────────── */
+@keyframes step-active-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+.step-active-indicator {
+  animation: step-active-pulse 2s ease-in-out infinite;
+}
+
+/* ─── Monospace log lines ────────────────────────────────────────────────── */
+.log-line {
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ─── Reduce motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Legacy compat (keep existing classes from breaking) ────────────────── */
+.glass-panel {
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid #1E2D42;
+}
+.radar-active {
+  animation: step-active-pulse 2s ease-in-out infinite;
+}
+
